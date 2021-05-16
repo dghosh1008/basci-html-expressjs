@@ -1,0 +1,19 @@
+GET http://localhost:3000/getAllUser HTTP/1.1
+
+###
+
+POST http://localhost:3000/insertData HTTP/1.1
+
+{
+    "name": "arghya",
+    "email": "xyz@email.com"
+}
+
+###
+
+POST http://localhost:3000/updateName HTTP/1.1
+
+{
+    "name": "Baddur besha",
+    "userid": 3
+}
