@@ -23,7 +23,9 @@ db.connect((err) => {
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.json({
+    limit: '50mb'
+}));
 
 app.get('/createdb', (req, res) => {
     let sql = 'Create database if not exists my_db';
@@ -54,7 +56,9 @@ app.post('/insertData', (req, res) => {
     db.query(insertSql, (err, result) => {
         if (err) res.status(500);
         console.log(result);
-        res.status(200).json({ message: "Form data saved." });
+        res.status(200).json({
+            message: "Form data saved."
+        });
     });
 });
 
@@ -64,9 +68,14 @@ app.get('/getAllUser/:id?', (req, res) => {
         sql = `select * from user where userid=${req.params.id}`;
     }
     db.query(sql, (err, result) => {
-        if (err) { console.log(err); res.status(500); }
+        if (err) {
+            console.log(err);
+            res.status(500);
+        }
         console.log('Rows-->', result);
-        res.status(200).json({data: result});
+        res.status(200).json({
+            data: result
+        });
     });
 });
 
@@ -74,7 +83,10 @@ app.put('/updateName', (req, res) => {
     console.log('Req body-->', req.body);
     let sql = `update user set name = '${req.body.name}' where userid = ${req.body.userid};`;
     db.query(sql, (err, result) => {
-        if (err) { console.log(err); res.status(500); }
+        if (err) {
+            console.log(err);
+            res.status(500);
+        }
         console.log('Rows-->', result);
         res.status(200).json(result);
     });
@@ -84,9 +96,14 @@ app.delete('/deleteUserById/:id', (req, res) => {
     console.log('Req query-->', req.params);
     let sql = `delete from user where userid=${req.params.id};`;
     db.query(sql, (err, result) => {
-        if (err) { console.log(err); res.status(500); }
+        if (err) {
+            console.log(err);
+            res.status(500);
+        }
         console.log('Rows-->', result);
-        res.status(200).json(result);
+        res.status(200).json({
+            message: 'Deleted successfully'
+        });
     });
 });
 
